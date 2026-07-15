@@ -84,20 +84,73 @@ const shoppingCart = [
         title: "Smartphone",
         price: 28000000,
         stock: 15,
-        category: "Electronics"
+        category: "Electronics",
+        quantity: 1
     },
     {
         id: 6,
         title: "Headphones",
         price: 2400000,
         stock: 25,
-        category: "Audio"
+        category: "Audio",
+        quantity: 2
     },
     {
         id: 9,
         title: "Webcam",
         price: 2100000,
         stock: 18,
-        category: "Accessories"
+        category: "Accessories",
+        quantity: 1
     }
 ];
+
+
+function showMenu(products, shoppingCart) {
+    rl.question('Enter the number of the desired list: \n1.products Menu \n2.shopping cart \n0.Exit\n', (menuNumber) => {
+        if(+menuNumber === 1) {
+            
+            products.forEach((product, index) => {
+                console.log(`${index + 1}.${product.title}  price:${product.price}  stock:${product.stock}\n`)
+            })
+            rl.question('Enter 1 to select a product or 2 to return to the menu: ', (enteredNumber) => {
+                if(+enteredNumber === 1) {
+
+                }else if(+enteredNumber === 2) {
+
+                }else {
+                    invalidInput()
+                }
+            })
+        } else if(+menuNumber === 2) {
+
+            shoppingCart.forEach((product, index) => {
+                console.log(`${index + 1}.${product.title}  price:${product.price}  quantity:${product.quantity}\n`)
+            })
+            rl.question('1.remove product from shopping cart \n2.view total cart amount\n', enteredNumber => {
+                if(+enteredNumber === 1) {
+
+                } else if(+enteredNumber === 2) {
+
+                } else {
+                    invalidInput()
+                }
+            })
+
+        } else if(+menuNumber === 0) {
+            rl.close()
+        
+        } else {
+            invalidInput()
+        } 
+    })
+}
+
+
+function invalidInput() {
+    console.log("invalid input.")
+    showMenu(products, shoppingCart)
+}
+
+
+showMenu(products, shoppingCart)
