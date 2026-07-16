@@ -135,11 +135,16 @@ function showMenu(products, shoppingCart) {
         } else if(+menuNumber === 2) {
 
             shoppingCart.forEach((product, index) => {
-                console.log(`${index + 1}.${product.title}  price:${product.price}  quantity:${product.quantity}\n`)
+                console.log(`${product.id}.${product.title}  price:${product.price}  quantity:${product.quantity}\n`)
             })
             rl.question('1.remove product from shopping cart \n2.view total cart amount\n', enteredNumber => {
                 if(+enteredNumber === 1) {
+                    rl.question('Enter the product number you wish to remove:', (productNumber) => {
+                        rl.question('How many of this product do you want to remove:', (enteredQuantityRemove) => {
 
+                            removeProductFromCart(products, shoppingCart, productNumber, enteredQuantityRemove)
+                        })
+                    })
                 } else if(+enteredNumber === 2) {
 
                 } else {
@@ -195,6 +200,45 @@ function addProductToCart(products, shoppingCart, productNumber, productQuantity
     console.log('The product has been successfully added to your shopping cart.')
     console.log(shoppingCart)
     showMenu(products, shoppingCart)
+}
+
+
+function removeProductFromCart(products, shoppingCart, productNumber, enteredQuantityRemove) {
+
+    if(isNaN(+productNumber) || isNaN(+enteredQuantityRemove) || productNumber <= 0 || enteredQuantityRemove <= 0) {
+        invalidInput()
+        return
+    }
+    let productIndex = shoppingCart.findIndex((p) => {
+        return p.id === +productNumber
+    })
+    
+    if(productIndex !== -1) {
+
+        let storeProduct = products.find((p) => {
+            return p.id === shoppingCart[productIndex].id
+        })
+
+        if(+enteredQuantityRemove === shoppingCart[productIndex].quantity) {
+            storeProduct.stock += +enteredQuantityRemove
+            shoppingCart.splice(productIndex,1)
+            console.log("The product was successfully removed.")
+        } else {
+            if(+enteredQuantityRemove > shoppingCart[productIndex].quantity) {
+                console.log("The entered quantity exceeds the available quantity.")
+            } else {
+                storeProduct.stock += +enteredQuantityRemove
+                shoppingCart[productIndex].quantity -= +enteredQuantityRemove
+                console.log(`${enteredQuantityRemove}units of product were successfully removed.`)
+            }
+        }
+
+    } else {
+        console.log("your entered product number is not exsist.")
+    }
+    console.log(shoppingCart)
+    showMenu(products, shoppingCart)
+
 }
 
 
