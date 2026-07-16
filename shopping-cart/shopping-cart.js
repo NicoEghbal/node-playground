@@ -116,8 +116,18 @@ function showMenu(products, shoppingCart) {
             rl.question('Enter 1 to select a product or 2 to return to the menu: ', (enteredNumber) => {
                 if(+enteredNumber === 1) {
 
-                }else if(+enteredNumber === 2) {
+                    rl.question('Enter your selected product number:', (productNumber) => {
 
+                        rl.question('How many of this product should be added to the shopping cart:', (productQuantity) => {
+
+                            addProductToCart(products, shoppingCart, productNumber, productQuantity)
+                          
+                        })
+                        
+
+                    })
+                }else if(+enteredNumber === 2) {
+                    showMenu(products, shoppingCart)
                 }else {
                     invalidInput()
                 }
@@ -149,6 +159,41 @@ function showMenu(products, shoppingCart) {
 
 function invalidInput() {
     console.log("invalid input.")
+    showMenu(products, shoppingCart)
+}
+
+function addProductToCart(products, shoppingCart, productNumber, productQuantity) {
+
+    let selectedProduct = products.find(product => {
+        return product.id === +productNumber
+    })
+    if(selectedProduct === undefined) {
+
+        console.log("your selected product is not exsist.")
+        showMenu(products, shoppingCart)
+        return
+    }
+    
+    if(selectedProduct.stock === 0 || +productQuantity > selectedProduct.stock) {
+        
+        console.log("this product is out of stock")
+        showMenu(products, shoppingCart)
+        return
+    }
+    let cartProduct = shoppingCart.find((p) => {
+        return p.id === selectedProduct.id
+    })
+
+    if(cartProduct) {
+        cartProduct.quantity += +productQuantity
+    } else {
+        shoppingCart.push({...selectedProduct, quantity:+productQuantity})
+
+    }
+
+    selectedProduct.stock -= +productQuantity
+    console.log('The product has been successfully added to your shopping cart.')
+    console.log(shoppingCart)
     showMenu(products, shoppingCart)
 }
 
