@@ -147,6 +147,8 @@ function showMenu(products, shoppingCart) {
                     })
                 } else if(+enteredNumber === 2) {
 
+                    calculateTotalPrice(shoppingCart)
+                
                 } else {
                     invalidInput()
                 }
@@ -236,9 +238,17 @@ function removeProductFromCart(products, shoppingCart, productNumber, enteredQua
     } else {
         console.log("your entered product number is not exsist.")
     }
-    console.log(shoppingCart)
     showMenu(products, shoppingCart)
 
+}
+
+function calculateTotalPrice(shoppingCart) {
+    let totalPrice = 0
+    shoppingCart.forEach((p) => {
+        totalPrice += p.price * p.quantity
+    })
+    console.log('total price: ' + totalPrice)
+    showMenu(products, shoppingCart)
 }
 
 
