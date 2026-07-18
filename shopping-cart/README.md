@@ -1,31 +1,43 @@
-# Shopping Cart
+# Shopping Cart CLI
 
-A simple terminal-based shopping cart application built with Node.js.
+A terminal-based shopping cart application built with Node.js as part of my Node Playground repository.
 
-## 📖 Description
+## 📖 Overview
 
-This project simulates a basic shopping cart system using JavaScript arrays and objects.
+This project simulates a simple shopping cart system where users can browse products, add items to their cart, remove items, and calculate the total price.
 
-The application stores a list of products and a user's shopping cart. The shopping cart contains three products by default.
+The main goal of this project was to practice JavaScript fundamentals, problem-solving, and writing modular Node.js code.
 
-Users can interact with the application through a terminal menu.
 
-## 🎯 Features
+## ✨ Features
 
-- View available products
-- Add a product to the shopping cart
-- Remove a product from the shopping cart
-- Calculate and display the total price of the shopping cart
+- Display available products
+- Add products to the shopping cart
+- Prevent adding unavailable products
+- Prevent purchasing more than available stock
+- Increase quantity if the product already exists in the cart
+- Remove products from the shopping cart
+- Restore product stock after removal
+- Calculate the total cart price
+- Validate user input
+- Interactive terminal menu using `readline`
 
 ## 🛠 Concepts Practiced
 
-- Arrays
-- Objects
-- Array Methods (`find`, `findIndex`, `forEach`, `push`, `splice`)
-- Conditional Statements
+- Arrays and Objects
+- Array methods
+  - `find()`
+  - `findIndex()`
+  - `forEach()`
+  - `every()`
+- Object Spread Operator
 - Functions
-- User Input with `readline`
-- Basic Program Flow
+- Callback functions
+- Conditional logic
+- Input validation
+- CLI applications with Node.js
+- Code organization
+- Modular thinking
 
 ## 🚀 How to Run
 
@@ -33,8 +45,27 @@ Users can interact with the application through a terminal menu.
 node shopping-cart.js
 ```
 
-## 📚 Learning Goal
+## 🎯 Future Improvements
 
-The purpose of this project is to practice solving real-world problems with JavaScript before moving on to backend frameworks like Express.js.
+- Split the project into multiple modules
+- Store data in JSON files
+- Replace callback nesting with Promises / async-await
+- Add better input validation
+- Improve user interface
+- Write automated tests
+
+## 📚 Learning Purpose
+
+This project is part of my **Node Playground** repository, where I build progressively more challenging Node.js projects while learning backend development.
+
+## 📈 Version History
+
+### v1.0.0
+
+- Product listing
+- Add to cart
+- Remove from cart
+- Calculate total price
+- Input validation
 
 ---
